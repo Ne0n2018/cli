@@ -1,7 +1,14 @@
 import { Command } from "commander";
 import fs from "fs";
 import { pipeline } from "stream";
-import { performTask, streamTransform } from "../tasks/task1.js";
+import {
+  performTask as task1,
+  streamTransform as transformTask1,
+} from "../tasks/task1.js";
+import {
+  performTask as task2,
+  streamTransform as transformTask2,
+} from "../tasks/task2.js";
 import { handleConsoleInput } from "../utils/consoleHandler.js";
 
 const program = new Command();
@@ -33,9 +40,27 @@ if (
   process.exit(1);
 }
 
+const tasks = {
+  sd: {
+    performTask: task1,
+    transformTask: transformTask1,
+  },
+  iv: {
+    performTask: task2,
+    transformTask: transformTask2,
+  },
+};
+
+if (!tasks[options.task]) {
+  console.error(`Error: Task "${options.task}" is not implemented.`);
+  process.exit(1);
+}
+
+const { performTask, transformTask } = tasks[options.task];
+
 if (!options.input && !options.output) {
   console.log("введите значения в терминал");
-  const transformStream = streamTransform(options.task);
+  const transformStream = transformTask(options.task);
 
   pipeline(process.stdin, transformStream, process.stdout, (err) => {
     if (err) {
@@ -58,7 +83,7 @@ if (!options.input && !options.output) {
     ? fs.createWriteStream(options.output)
     : process.stdout;
 
-  pipeline(readStream, streamTransform(options.task), writeStream, (err) => {
+  pipeline(readStream, transformTask(options.task), writeStream, (err) => {
     if (err) {
       console.error("Pipeline failed:", err);
       process.exit(1);
