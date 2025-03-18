@@ -4,16 +4,16 @@
 
 1. Убедитесь, что Node.js установлен.
 2. Скачайте проект и установите зависимости:
-   npm install
+   - `npm install`: команда для установки всех зависимостей проекта
 
 ## Запуск
 
 Для запуска используйте команду:
 
-- node src/index.js -i input.txt -o output.txt -t sd
-- node src/index.js -i input.txt -o output.txt -t iv
-- node src/index.js -t sd
-- node src/index.js -t iv
+- `node src/index.js -i input.txt -o output.txt -t sd`: запуск первого задания с входными и с выходными файлами
+- `node src/index.js -i input.txt -o output.txt -t iv`:запуск второго задания с входными и с выходными файлами
+- `node src/index.js -t sd`:запуск первого задания без входных и выходных файлов
+- `node src/index.js -t iv`:запуск второго задания без входных и выходных файлов
 
 ### Параметры:
 
