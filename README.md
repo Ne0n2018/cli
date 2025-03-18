@@ -9,10 +9,11 @@
 ## Запуск
 
 Для запуска используйте команду:
-node src/index.js -i input.txt -o output.txt -t sd
-node src/index.js -i input.txt -o output.txt -t iv
-node src/index.js -t sd
-node src/index.js -t iv
+
+- node src/index.js -i input.txt -o output.txt -t sd
+- node src/index.js -i input.txt -o output.txt -t iv
+- node src/index.js -t sd
+- node src/index.js -t iv
 
 ### Параметры:
 
